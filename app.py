@@ -16,17 +16,17 @@ def hello_world():
 @app.route("/contact")
 def contact_page():
 	gh_link = "https://github.com/weiernt"
-	
-	
 	return render_template("contact_page.html", gh_link=gh_link)
 	
 class MySearchForm(Form):
 	iso = TextField("iso: ", validators=[validators.DataRequired()])
-	region_province = TextField("province: ", validators=[validators.DataRequired()])
+	region_province = TextField("province: ")
 	
 	
 @app.route("/search", methods=["GET", "POST"])
 def search_page():
+	print(app.url_map)
+	gh_link = "https://github.com/weiernt"
 	print(request.form)
 	form = MySearchForm(request.form)
 	# iso=region_province=False
@@ -38,11 +38,17 @@ def search_page():
 		
 		if form.validate():
 			search_results = make_request(iso, region_province)
-	return render_template("search_page.html", form=form, search_results=search_results)
+	print(type(search_results))
+	if search_results:
+		print(search_results['data'])
+	return render_template("search_page.html", form=form, search_results=search_results, gh_link=gh_link)
 		
 def make_request(iso, region_province):
 	url = "https://covid-api.com/api/reports"
-	url = url + f"?iso={iso}&region_province={region_province}"
+	if not region_province:
+		url += f"?iso={iso}"
+	else:
+		url = url + f"?iso={iso}&region_province={region_province}"
 	r = requests.request("GET", url)
 	return json.loads(r.text)
 	
