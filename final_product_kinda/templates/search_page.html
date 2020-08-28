@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<header>
+    <title>Search Page</title>
+</header>
+
+<body>
+<ul>
+    {% for thing in list_of_data %}
+    <li>{{thing}}</li>
+    <p> {{thing["confirmed"]}}</p>
+    {%endfor%}
+</ul>
+</body>
