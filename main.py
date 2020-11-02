@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 import requests
-# import requests as r
+
 
 app = Flask(__name__)
 gh_link = "https://github.com/weiernt"
@@ -11,6 +11,7 @@ list_of_contacts = [gh_link, "https://facebook.com"]
 def hello():
     return render_template("home_page.html", links=list_of_contacts)
 
+# simple function, taking in the ISO code for the country, to return covid data
 def make_request(iso):
     url = "https://covid-api.com/api/reports?"
     url = url + "iso=" + iso
