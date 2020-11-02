@@ -11,3 +11,7 @@ Built using Python3.8 but should work for 3.6+. And with the lovely help from Py
 ## Requirements:
 - Flask
 - requests
+
+## Preview Image:
+A possible final product, showing covid data for Australia. Lots of possibilities for expansion.
+![Preview](final_product_kinda/final_images/search_page_preview.png)
